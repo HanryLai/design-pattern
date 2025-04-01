@@ -1,0 +1,33 @@
+### Bài 5: Multi-tier Voting App
+version: "3.8"
+services:
+    vote:
+        build: ./vote
+        ports:
+            - "5000:5000"
+        networks:
+            - voting_network
+    result:
+        build: ./result
+        ports:
+            - "5001:5001"
+        networks:
+            - voting_network
+    redis:
+        image: redis:latest
+        networks:
+            - voting_network
+    worker:
+        build: ./worker
+        networks:
+            - voting_network
+    postgres:
+        image: postgres:latest
+        environment:
+            POSTGRES_USER: user
+            POSTGRES_PASSWORD: password
+            POSTGRES_DB: votingdb
+        networks:
+            - voting_network
+networks:
+    voting_network:

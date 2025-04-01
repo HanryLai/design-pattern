@@ -1,0 +1,7 @@
+### Bài 9: Chạy ứng dụng Flask
+version: "3.8"
+services:
+    flaskapp:
+        build: .
+        ports:
+            - "5000:5000"

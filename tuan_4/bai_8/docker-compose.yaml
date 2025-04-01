@@ -1,0 +1,21 @@
+### Bài 8: Kết nối Node.js với MySQL
+version: "3.8"
+services:
+    mysql:
+        image: mysql:8.0
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: mydb
+            MYSQL_USER: user
+            MYSQL_PASSWORD: password
+    nodeapp:
+        build: .
+        environment:
+            DB_HOST: mysql
+            DB_USER: user
+            DB_PASSWORD: password
+            DB_NAME: mydb
+        ports:
+            - "3000:3000"
+        depends_on:
+            - mysql

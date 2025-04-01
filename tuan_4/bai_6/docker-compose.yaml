@@ -1,0 +1,21 @@
+### Bài 6: Chạy WordPress với MySQL
+version: "3.8"
+services:
+    mysql:
+        image: mysql:5.7
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: wordpress
+            MYSQL_USER: user
+            MYSQL_PASSWORD: password
+    wordpress:
+        image: wordpress:latest
+        environment:
+            WORDPRESS_DB_HOST: mysql
+            WORDPRESS_DB_USER: user
+            WORDPRESS_DB_PASSWORD: password
+            WORDPRESS_DB_NAME: wordpress
+        ports:
+            - "8082:80"
+        depends_on:
+            - mysql
